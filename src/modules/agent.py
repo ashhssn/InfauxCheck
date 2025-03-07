@@ -11,6 +11,11 @@ from transformers import BertTokenizer
 from typing import List
 from dotenv import load_dotenv
 
+from online_search import get_search_results, extract_text_from_url
+import requests
+from bs4 import BeautifulSoup
+from googlesearch import search
+
 load_dotenv()
 
 @tool
@@ -66,17 +71,33 @@ def retrieve_from_vs(data: str):
     # return top-k results
     return search_results
 
+@tool
+def online_search(query: str):
+    """
+    Searches Google and extracts content from results.
+    """
+    search_results = get_search_results(query)
+    search_data = {}
+    
+    for url in search_results:
+        search_data[url] = extract_text_from_url(url)
+    
+    return search_data
+
 if __name__ == "__main__":
     data = "Over 2.4 million Singaporeans to receive up to S$400 in September to help with cost of living"
-    tools = [bert_classify, retrieve_from_vs]
+    similarity_threshold = 0.5
+    tools = [bert_classify, retrieve_from_vs, online_search]
     prompt = ChatPromptTemplate(
         [
             (
                 "system",
-                "You are very powerful misinformation detector. First analyze the input text for any signs \
+                f"""You are very powerful misinformation detector. First analyze the input text for any signs \
                 of misinformation/disinformation. Step 1: Perform classification using the BERT classifier. \
-                     Step 2: Perform the vector similarity search. Step 3: Given both outputs, make a decision and \
-                         provide evidence as to whether the input is likely true or likely false.",
+                Step 2: Perform the vector similarity search. Step 3: If the similarity search returns a score \
+                lower than {similarity_threshold}, use the online search tool, with the input text as the query, \
+                to scrape for relevant data to aid in your decision. Given all the outputs, make a decision and \
+                provide evidence as to whether the input is likely true or likely false.""",
             ),
             ("user", "{input}"),
             MessagesPlaceholder(variable_name="agent_scratchpad"),
