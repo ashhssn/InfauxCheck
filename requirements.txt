@@ -1,0 +1,2 @@
+easyocr
+py7zr
