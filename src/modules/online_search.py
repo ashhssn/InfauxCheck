@@ -43,7 +43,7 @@ def online_search_agent(query):
     
     return search_data
 
-# Uncomment to test the python file
+# Test the function
 if __name__ == "__main__":
     user_query = "Over 2.4 million Singaporeans to receive up to S$400 in September to help with cost of living"
     results = online_search_agent(user_query)

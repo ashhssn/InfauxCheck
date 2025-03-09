@@ -16,6 +16,8 @@ import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
 
+from image_ocr_handler import extract_text_from_image
+
 load_dotenv()
 
 @tool
@@ -85,7 +87,9 @@ def online_search(query: str):
     return search_data
 
 if __name__ == "__main__":
-    data = "Over 2.4 million Singaporeans to receive up to S$400 in September to help with cost of living"
+    image_path = "data/images/2024-02-25_3310289540023402853.jpg"  # Replace with your image path
+    data = extract_text_from_image(image_path)
+    #data = "Over 2.4 million Singaporeans to receive up to S$400 in September to help with cost of living"
     similarity_threshold = 0.5
     tools = [bert_classify, retrieve_from_vs, online_search]
     prompt = ChatPromptTemplate(
