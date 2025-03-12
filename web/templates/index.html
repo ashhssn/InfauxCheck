@@ -1,0 +1,437 @@
+{% extends "includes/base_template.html" %}
+{% block title %} InfauxCheck {% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div id="side-bar" class="col-3">
+            
+            <a class="d-flex align-items-center mt-2 mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img src="../static/images/logo.jpg" style="border-radius:20px;width:100%;">
+            </a>            
+
+            <!-- Chat Items -->
+            <div class="list-group list-group-flush mt-3">
+                <a href="#" class="list-group-item side-bar-item border-bottom-0 active" aria-current="true">
+                  <div class="d-flex w-100 justify-content-between">
+                    <p class="mb-1 pop_semi_bold_colored">Chat 1</p>
+                  </div>
+                </a>
+                <!-- <a href="#" class="list-group-item side-bar-item border-bottom-0">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 pop_semi_bold_colored">Chat 2</h5>
+                  </div>
+                </a> -->
+                <a href="#" class="list-group-item side-bar-item border-bottom-0 mt-3 p-0 d-sm-none">
+                  <div class="d-flex w-100 justify-content-between">
+                    <button type="button" style="background-color:#073151;color:white;height:50px;" class="btn w-100 mt-3 pop_semi_bold_colored" onclick="toggle_sidebar()">Collaspe</button>
+                  </div>
+                </a>
+            </div>
+
+        </div>
+        <!-- End Of Sidebar -->
+
+        <div class="col-9 p-0" id="content-bar-container">
+
+          <div class="container-fluid p-0" id="content-bar">
+            <div class="d-flex flex-column overflow-hidden border-start min-h-screen max-h-screen">
+     
+              <div class="d-flex bg-white border-bottom mb-3">
+                <button class="btn btn mt-2 ms-3" style="width:50px;height:50px;" onclick="toggle_sidebar()"><i class="fa fa-bars"></i></a>
+              </div> 
+
+              <div class="mx-3 d-flex flex-column p-5 row-gap-3 overflow-y-auto" id="chat-content-parent">
+                <div class="container" id="chat-content">
+
+                  <div class="d-flex flex-column justify-content-center align-items-center" id="welcome-card">
+                    <h2 class="mb-4">Welcome To InfauxCheck</h2>
+                    <div class="row g-4 py-2 justify-content-center">
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card h-100 shadow-sm rounded-4 text-center p-4">
+                            <div class="icon mb-2">
+                                <i class="fa-solid fa-brain fs-2" width="40"></i>
+                            </div>
+                            <h5 class="fw-bold">Adaptive Learning</h5>
+                            <p class="text-muted">InfauxCheck AI continuously evolves by analyzing emerging misinformation patterns, ensuring accurate and up-to-date verification.</p>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card h-100 shadow-sm rounded-4 text-center p-4">
+                            <div class="icon mb-2">
+                              <i class="fa-solid fa-magnifying-glass fs-2" width="40"></i>
+                            </div>
+                            <h5 class="fw-bold">Context-Aware Verification</h5>
+                            <p class="text-muted">Our AI goes beyond surface-level checks, analyzing contextual nuances, sources, and cross-referencing data for precise fact verification.</p>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card h-100 shadow-sm rounded-4 text-center p-4">
+                            <div class="icon mb-2">
+                              <i class="fa-solid fa-photo-film fs-2" width="40"></i>
+                            </div>
+                            <h5 class="fw-bold">Multi-Modal Fact-Checking</h5>
+                            <p class="text-muted">Combining text,and images, InfauxCheck verifies claims across different media formats for a comprehensive misinformation defense.</p>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card h-100 shadow-sm rounded-4 text-center p-4">
+                            <div class="icon mb-2">
+                              <i class="fa-solid fa-user-group fs-2" width="40"></i>
+                            </div>
+                            <h5 class="fw-bold">Community & Expert Collaboration</h5>
+                            <p class="text-muted">Leveraging expert insights and user feedback, InfauxCheck enhances misinformation detection, refining AI responses through collective intelligence.</p>
+                        </div>
+                      </div>
+                    </div> <!-- End Of Row-->
+                </div> <!-- End Of Welcome Card -->
+                
+                  <!-- Human Chat message -->
+                  <!-- <div class="d-flex flex-column justify-content-end align-items-end column-gap-2 mb-5 user-chat-content">
+                    <div class="w-75 d-flex justify-content-end mb-3">
+                      <img src="../static/images/unsplash-photo-1.jpg" alt="Uploaded Image" class="img-fluid custom-image-size">
+                    </div>
+                    <div class="rounded-4 p-3 w-75" style="background-color:#ececec;color:black;">
+                        I am John I am John I am John I am John I am John I am John I am John I am John I am John 
+                        I am John I am John I am John I am John I am John I am John I am John I am John I am John
+                        I am John I am John I am John I am John I am John I am John I am John I am John I am John
+                    </div>
+                  </div>  -->
+                  <!-- AI Chat message -->
+                  <!-- <div class="d-flex flex-column column-gap-2 mb-3 mt-5 ai-chat-content">
+                      <div style="color:black;">
+                        You are john You are john You are john You are john You are john You are john You are john You are john You are john
+                        You are john You are john You are john You are john You are john You are john You are john You are john You are john
+                      </div>
+                      <hr class="mt-5 mb-5">
+                      <div style="color:black;">
+                        You are john You are john You are john You are john You are john You are john You are john You are john You are john
+                        You are john You are john You are john You are john You are john You are john You are john You are john You are john
+                      </div>
+                  </div> -->
+
+                </div>
+              </div>
+                  
+              <div class="chat-input-container d-flex flex-column border border-1 mt-3" style="margin-bottom:20px;">
+                <!-- Image Preview Thumbnail -->
+                <div id="image-upload-list" class="d-flex w-100">
+
+                </div>
+                <!-- Text Input -->
+                <div class="d-flex align-items-start w-100">
+                  <textarea id="chat-textarea-id" class="chat-textarea form-control p-0" placeholder="Ask anything"></textarea>
+                </div>
+                
+                <div class="d-flex align-items-start w-100 mt-3 mb-3">
+                  <div class="upload-btn-b-box">
+                    <input type="file" name="image" id="upload_photo" accept="image/*" class="upload-btn" multiple required>
+                    <i class="fa fa-plus icon-add" style="font-size: 24px;"></i>
+                  </div>
+                  
+                  <button style="background-color:#d3d9df;" class="btn ms-auto rounded-circle" id="submitButton">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  
+                </div>
+              </div> <!-- End Of Text input -->
+            </div> <!-- End Of Content -->
+          </div> <!-- End Of Container-Fluid -->
+        </div>  <!-- End Of Col-9 -->
+    </div> <!-- End Of Row -->
+</div> <!-- End Of Container-Fluid For Whole Page-->
+
+<!-- To view a larger size of the image when user click the thumbnail -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+        <button type="button" class="btn-close" onclick="closeImageModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="modal-image" class="img-fluid rounded" src="" alt="Preview">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var side_bar_element = document.getElementById("side-bar");
+  var content_bar_element = document.getElementById("content-bar-container");
+  var content_bar_element_width = content_bar_element.style.width;
+  var current_image_src = "";
+
+  function toggle_sidebar() {
+    if (getComputedStyle(side_bar_element).getPropertyValue("display") == 'none') {
+      side_bar_element.style.display = 'block';
+      if (window.innerWidth <= 768) {
+        side_bar_element.classList.add("offcanvas-sm");
+        side_bar_element.classList.add("offcanvas-start");
+        side_bar_element.classList.add("show");
+      }
+
+      content_bar_element.style.width =  content_bar_element_width;
+      
+    } else {
+      // Hide Content 
+      side_bar_element.style.display = 'none';
+      content_bar_element.style.width = 100 + "%";
+    };
+  }
+  
+  let images = []
+  document.querySelector('#upload_photo').addEventListener("change", previewImages);
+  function previewImages(){
+    if (this.files) {
+      // For loop for multiple files
+      // for (var i = 0; i < this.files.length; i++) {
+      //     readAndPreview(this.files[i],this.files.length)
+      // }
+      readAndPreview(this.files[0],this.files.length)
+      //https://stackoverflow.com/questions/19643265/second-use-of-input-file-doesnt-trigger-onchange-anymore
+      event.target.value = ''
+    }
+  }
+
+  var imageUploadList = document.getElementById("image-upload-list");
+  function readAndPreview(file,currentFileLength){
+    size_limit = 1000000 * 4
+    console.log("readAndPreview file",currentFileLength)
+    if (currentFileLength > 0){
+        if (!/\.(jpe?g|png|gif|jfif)$/i.test(file.name)) {
+            return alert(file.name + " is not an image");
+        }
+       
+        else if (file.size > size_limit){
+            return alert(file.name + "is bigger than 4MB!");
+        }
+        else{
+          if (images.length >= 1){
+            images = []
+            imageUploadList.innerHTML = ""; 
+          }
+          var reader = new FileReader();
+          images.push(file)
+          reader.addEventListener("load", function(event) {
+              addThumbNailPhoto(this.result);
+          });
+          reader.readAsDataURL(file);
+      }
+    } 
+  }
+
+  // This is for copy pasting function, ctrl-c && ctrl-v
+  document.getElementById('chat-textarea-id').addEventListener('paste', function(event) {
+    event.preventDefault();  // Prevent default pasting behavior
+    let clipboardItems = (event.clipboardData || event.originalEvent.clipboardData).items;
+     
+    // For now the code only allow one image to be paste in the browser
+    // This for loop is for future reference for multiple images
+    // for (let i = 0; i < clipboardItems.length; i++) {
+        if (clipboardItems.length >= 1){
+          let item = clipboardItems[0];
+          console.log("item_type",item.type);          
+          if (item.type.indexOf("image") !== -1) {
+              imageUploadList.innerHTML = ""; 
+              let blob = item.getAsFile(); // Convert to file blob
+              
+              // // Get File Type
+              let fileExtension = item.type.split("/")[1]; // Example: "png", "jpeg", "gif"
+              let timestamp = generateTimestamp();
+              // // Generate a unique file name based on timestamp
+              // let timestamp = new Date().toISOString().replace(/[-:.]/g, "");
+              let uniqueFileName = `image_${timestamp}.${fileExtension}`;
+              
+              let file = new File([blob], uniqueFileName, { type: blob.type }); 
+              let imgUrl = URL.createObjectURL(blob);
+
+              images.push(file); 
+              addThumbNailPhoto(imgUrl);            
+          }
+
+          if (item.type.startsWith("text/")){
+            let pastedText = event.clipboardData.getData("text");
+
+            let startPos = userTextInput.selectionStart;
+            let endPos = userTextInput.selectionEnd;
+
+            // Insert the pasted text at the cursor position
+            let currentValue = userTextInput.value;
+            userTextInput.value = currentValue.substring(0, startPos) + pastedText + currentValue.substring(endPos);
+
+            // Move cursor to the end of pasted text
+            userTextInput.selectionStart = userTextInput.selectionEnd = startPos + pastedText.length;
+          }
+        }
+    // }
+  });
+
+  function addThumbNailPhoto(imgUrl){
+    imageUploadList.insertAdjacentHTML("beforeend",
+      `<div class="upload-image-container">
+          <img id="image-uploaded_1" 
+               class="upload-image img-thumbnail" 
+               src="${imgUrl}" 
+               style="cursor:pointer;"
+               data-bs-toggle="modal" 
+               data-bs-target="#imageModal" 
+               onclick="openImageModal('${imgUrl}')">
+          <i class="fa fa-close delete-pointer" 
+             id="delete_1"></i>
+      </div>`
+      )
+      document.getElementById("delete_" + 1).addEventListener("click", removeSelectedPhoto);
+  }
+
+  // Function to update the Bootstrap modal image
+  function openImageModal(imgUrl) {
+    let modal = document.getElementById("imageModal");
+    let modalImg = document.getElementById("modal-image");
+    modalImg.src = imgUrl;
+    modal.style.display = "block";
+  }
+
+  // Function to close the modal
+  function closeImageModal() {
+      document.getElementById("imageModal").style.display = "none";
+  }
+  // The Cross Icon, Remove Thumbnail or Photo Function
+  function removeSelectedPhoto(){
+        parentElement = document.getElementById(this.id).parentNode
+        parentElement.remove()
+        images = []
+  }
+
+  const userTextInput = document.getElementById("chat-textarea-id");
+  const submitButton = document.getElementById("submitButton");
+  var uploadImageContainer = document.querySelector(".upload-image-container");
+
+  submitButton.addEventListener("click",submitUserQuery);
+
+  var chatContent = document.getElementById("chat-content");
+  function submitUserQuery(){
+    let textMessage = userTextInput.value.trim();
+    if (!textMessage && images.length === 0) {
+      alert("Please enter a message or upload an image.");
+      return;
+    }
+
+    let formData = new FormData();
+    formData.append("user_text_input",textMessage);
+    if (images.length > 0) {
+        formData.append("uploaded_image", images[0]);
+    }
+
+    var welcomeCard =  document.getElementById('welcome-card');
+    if (typeof(welcomeCard) != 'undefined' && welcomeCard != null)
+    {
+      welcomeCard.remove();
+    }
+
+    let userMessage = `<div class="d-flex flex-column align-items-end column-gap-2 mb-3 user-chat-content">`;
+    // Add image if exists
+    if (images.length > 0) {
+            let imageUrl = URL.createObjectURL(images[0]); 
+            userMessage += `
+            <div class="w-75 d-flex justify-content-end mb-3">
+               <img src="${imageUrl}" alt="User Uploaded Image" class="img-fluid custom-image-size"
+               style="cursor:pointer;"
+               data-bs-toggle="modal" 
+               data-bs-target="#imageModal" 
+               onclick="openImageModal('${imageUrl}')"
+               >
+            </div>`;
+    }
+
+    // Add text if exists
+    if (textMessage) {
+        userMessage += `
+        <div class="rounded-4 p-3 user-input-text">
+            ${textMessage}
+        </div>`;
+    }
+    userMessage += `</div>`;
+
+    let aiMessages = document.querySelectorAll(".ai-chat-content");
+    if (aiMessages.length > 0) {
+        let latestAIMessage = aiMessages[aiMessages.length - 1]; 
+        latestAIMessage.insertAdjacentHTML("afterend", userMessage);
+    } else {
+        chatContent.insertAdjacentHTML("beforeend", userMessage);
+    }
+
+    var chat_content_parent = document.getElementById("chat-content-parent");
+    if (!chat_content_parent.classList.contains('flex-grow-1')){
+      chat_content_parent.classList.add("flex-grow-1");  
+    }
+
+    let userMessages = document.querySelectorAll(".user-chat-content");
+    let latestUserMessage = userMessages[userMessages.length - 1]; 
+    
+    let aiPlaceholder = document.createElement("div");
+    aiPlaceholder.className = "ai-placeholder-response p-3";
+    aiPlaceholder.innerHTML = `
+        <p class="card-text placeholder-glow">
+            <span class="placeholder col-12"></span>
+            <span class="placeholder col-10"></span>
+            <span class="placeholder col-8"></span>
+            <span class="placeholder col-10"></span>
+            <span class="placeholder col-12"></span> 
+        </p>`;
+    latestUserMessage.insertAdjacentElement("afterend", aiPlaceholder);
+   
+    // If Loading More Than Three Seconds, This Will take place, you can try time.sleep(4) and time.sleep(2) to see the difference
+    let timeout = setTimeout(() => {
+      aiPlaceholder.innerHTML = `
+        <p class="card-text placeholder-glow">
+            <span class="placeholder col-8"></span>
+            <span class="placeholder col-5"></span>
+            <span class="placeholder col-6"></span>
+        </p>`; 
+    }, 3000); 
+    
+    fetch("/user_query", {
+        method: "POST",
+        body: formData
+    }).then(response => response.json())
+      .then(data => {
+        clearTimeout(timeout); 
+        aiPlaceholder.remove(); 
+            if (data.success) {
+                userTextInput.value = ""; 
+                imageUploadList.innerHTML = ""; 
+                images = []; 
+
+                let aiResponseTemplate = `
+                <div class="d-flex flex-column column-gap-2 mb-3 mt-5 ai-chat-content">
+                    <h6 class="fw-bold">Truth Probability Score</h6>
+                    <p style="color:black;">0.98</p>
+                    <h6 class="fw-bold">XXXX</h6>
+                    <p>${data.response}</p>
+                    <div style="color:black;">
+                      <p>I Declare That This Information Is True</p>
+                    </div>
+                </div>
+                `;
+                latestUserMessage.insertAdjacentHTML("afterend", aiResponseTemplate);
+            }
+            if (data.error){
+              alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Error uploading:", error);
+        });
+  }
+</script>
+{% endblock %}

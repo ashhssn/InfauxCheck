@@ -1,0 +1,128 @@
+/* Chat Input Box */
+.chat-input-container {
+    align-items: center;
+    background: white;
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    padding-bottom:0px;
+    margin:auto;
+}
+
+/* Text Input */
+.chat-textarea {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    height: 50px;
+    font-size: 16px;
+    background: transparent;
+}
+
+.chat-textarea:focus,
+.chat-textarea:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+/* Action Buttons */
+.chat-action-btn {
+    background: #f5f5f5;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.upload-btn {
+    opacity: 0;
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+.upload-btn-b-box {
+    background: #d3d9df;
+    position: relative;
+    /* Key to make the upload button inside the box we want, life safer!!!!*/
+    overflow: hidden;
+    /* display: block; */
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  
+.upload-btn-b-box:hover {
+    border-color: #ff944d;
+    color:#ff944d;
+}
+
+.upload-image-container{
+    position: relative;
+    /* width:56px;
+    height:56px; */
+    /* margin-left:10px; */
+    margin-right:10px;
+    margin-bottom:10px;
+    padding:0px;
+  }
+  
+.upload-image{
+    width:60px;
+    height:60px;
+    border:1px solid rgb(227 227 227);
+    border-radius:10px;
+    object-fit: contain;
+}
+
+.delete-pointer {
+    /* display: none; */
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    border-radius: 10px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    cursor: pointer;
+}
+
+.fa {
+    font-size: 14px;
+}
+
+.welcome-card{
+    border-color:#e2e2e2;
+}
+
+.custom-image-size{
+    width:150px;
+    object-fit: contain; 
+    border-radius: 10px; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15); /* Soft shadow */
+}
+
+.user-input-text{
+    background-color: #ececec;
+    color: black;
+    max-width: 75%;
+}

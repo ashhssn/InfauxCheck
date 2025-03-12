@@ -1,0 +1,174 @@
+body {
+    font-family: "Poppins", sans-serif;
+  }
+
+html {
+    scroll-behavior: smooth;
+}
+/* Type Of Font Weights */
+/* Poppins Semi-Bold 600*/
+.pop_semi_bold {
+    font-weight: 600;
+}
+
+.pop_semi_bold_auto {
+    font-weight: 600;
+    display: block; /* Ensures that the elements take up the full width available and stack vertically */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.icon-circle {
+    display: inline-flex; /* Use inline-flex to keep the icon inline but also apply flexbox properties */
+    align-items: center; /* Vertically center the icon */
+    justify-content: center; /* Horizontally center the icon */
+    border-radius: 50%; /* Create a circular shape */
+    background-color: #A5784C; /* Circle background color, change as needed */
+    color: #EFEFEF; /* Icon color, change as needed */
+    width: 40px; /* Circle size, adjust as needed */
+    height: 40px; /* Circle size, adjust as needed */
+    padding: 10px; /* Adjust padding to scale the icon inside the circle */
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.pop_bold{
+    font-size: 24px;
+    font-weight:650;
+    color:#F0972D;
+}
+
+.pop_normal{
+    font-size: 16px;
+    font-weight:400;
+}
+
+.pop_semi_bold_colored{
+    font-size: 18px;
+    font-weight:600;
+    color:#0b3453;
+}
+
+.pop_italic{
+    font-size: 16px;
+    font-weight:400;
+    font-style: italic;
+}
+
+/* Side Bar section */
+.side-bar-item {
+    padding: 12px;
+    margin-left: 14px; 
+    border-radius:10px;
+    height:50px;
+    margin-right:14px;
+}
+
+.side-bar-item.active{
+    background-color: #9bafbe6e;
+    border-radius: 10px;
+}
+
+#side-bar{
+    height:100vh;
+    display: block;
+}
+
+/* #content-bar{ */
+    /* height:100vh; */
+    /* background-color: #9bafbe16; */
+/* } */
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.max-h-screen {
+    max-height: 100vh;
+}
+/* // X-Small devices (portrait phones, less than 576px) */
+@media (max-width: 599px) { 
+    #side-bar{
+       width:100%;
+       display: none;
+    }
+
+    #content-bar-container{
+        width:100%;
+    }
+}
+/* // Small devices (landscape phones, 600px and up) */
+@media (min-width: 600px) { 
+    #side-bar{
+        width:40%;
+    }
+    #content-bar-container{
+        width:60%;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {  
+    #side-bar{
+        width:32%;
+    }
+    #content-bar-container{
+        width:68%;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {  
+    #side-bar{
+        width:27%;
+    }
+    #content-bar-container{
+        width:73%;
+    }
+}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+    #side-bar{
+        width:22%;
+    }
+    #content-bar-container{
+        width:78%;
+    }
+}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) { 
+    #side-bar{
+        width:20%;
+    }
+    #content-bar-container{
+        width:80%;
+    }
+ }
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1900px) { 
+    #side-bar{
+        width:15%;
+    }
+    #content-bar-container{
+        width:85%;
+    }
+ }
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.max-h-screen {
+    max-height: 100vh;
+}
