@@ -16,7 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
 
-from image_ocr_handler import extract_text_from_image
+from paddle_ocr import extract_text_from_image
 
 load_dotenv()
 
