@@ -4,24 +4,22 @@ from langchain.agents import tool, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.agents.format_scratchpad.openai_tools import format_to_openai_tool_messages
 from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
+from langchain_core.documents import Document
 
 from bert_classifier import CustomDataset, BERTModel
 import torch
 from transformers import BertTokenizer
-from typing import List
+from typing import Tuple, List, Dict
 from dotenv import load_dotenv
 
 from online_search import get_search_results, extract_text_from_url
-import requests
-from bs4 import BeautifulSoup
-from googlesearch import search
 
 from paddle_ocr import extract_text_from_image
 
 load_dotenv()
 
 @tool
-def bert_classify(data: str):
+def bert_classify(data: str) -> Tuple[torch.Tensor, torch.Tensor]:
     """
     Bert model to classify the input string as true or fake news.
     Returns the predicted label, and probability of being true.
@@ -53,7 +51,7 @@ def bert_classify(data: str):
     return prediction, output_sigmoid
 
 @tool
-def retrieve_from_vs(data: str):
+def retrieve_from_vs(data: str) -> List[Document]:
     """
     Perform similarity search and retrieve the data from the vector store.
     """
@@ -74,7 +72,7 @@ def retrieve_from_vs(data: str):
     return search_results
 
 @tool
-def online_search(query: str):
+def online_search(query: str) -> Dict[str, str]:
     """
     Searches Google and extracts content from results.
     """
@@ -88,6 +86,7 @@ def online_search(query: str):
 
 if __name__ == "__main__":
     image_path = "data/images/2024-02-25_3310289540023402853.jpg"  # Replace with your image path
+    print("Performing OCR on the image...")
     data = extract_text_from_image(image_path)
     #data = "Over 2.4 million Singaporeans to receive up to S$400 in September to help with cost of living"
     similarity_threshold = 0.5
