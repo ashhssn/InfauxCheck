@@ -1,13 +1,14 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
+from typing import Dict, Union, List, Any, Tuple, Optional
 import transformers
 from transformers import BertModel, BertTokenizer
 
 
 class CustomDataset(Dataset):
 
-    def __init__(self, data, tokenizer, max_len, training=False):
+    def __init__(self, data: Union[Dict[str, List], str], tokenizer: BertTokenizer, max_len: int, training: bool = False):
         self.data = data
         self.tokenizer = tokenizer
         self.max_len = max_len
@@ -20,10 +21,10 @@ class CustomDataset(Dataset):
         else:
             self.features = [self.data]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.features)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int) -> Dict[str, Any]:
         feature = str(self.features[idx])
         if self.training:
             label = self.labels[idx]
@@ -46,7 +47,7 @@ class CustomDataset(Dataset):
                 'targets': torch.tensor(label, dtype=torch.float)
             }
         else:
-                        return {
+            return {
                 'review_text': feature,
                 'input_ids': encoding['input_ids'].flatten(),
                 'attention_mask': encoding['attention_mask'].flatten()
@@ -54,13 +55,13 @@ class CustomDataset(Dataset):
     
 class BERTModel(nn.Module):
 
-    def __init__(self, numcl=1):
+    def __init__(self, numcl: int = 1):
         super().__init__()
         self.model = BertModel.from_pretrained("bert-base-uncased", torch_dtype=torch.float, attn_implementation="sdpa", return_dict=False)
         self.drop = nn.Dropout(p=0.4)
         self.fc = nn.Linear(self.model.config.hidden_size, numcl)
 
-    def forward(self, input_ids, attn_mask):
+    def forward(self, input_ids: torch.Tensor, attn_mask: torch.Tensor) -> torch.Tensor:
         _, pooled_output = self.model(
             input_ids=input_ids,
             attention_mask=attn_mask)

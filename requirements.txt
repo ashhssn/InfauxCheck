@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+google
+pandas
+transformers
+torch
+langchain
+python-dotenv
+paddlepaddle

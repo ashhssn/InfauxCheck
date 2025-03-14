@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
+from typing import List, Dict
 
-def get_search_results(query, num_results=5):
+def get_search_results(query: str, num_results: int = 5) -> List[str]:
     """
     Perform a Google search and return the top-k results as URLs.
     """
@@ -11,7 +12,7 @@ def get_search_results(query, num_results=5):
         search_results.append(j)
     return search_results
 
-def extract_text_from_url(url):
+def extract_text_from_url(url: str) -> str:
     """
     Scrape the content of a website.
     """
@@ -28,7 +29,7 @@ def extract_text_from_url(url):
         return f"Failed to extract from {url}: {str(e)}"
     
 # Main Function 
-def online_search_agent(query):
+def online_search_agent(query: str) -> Dict[str, str]:
     """
     Searches Google and extracts content from results.
     """
