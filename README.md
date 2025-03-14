@@ -12,7 +12,7 @@ InfauxCheck is an LLM Agent-powered application to combat misinformation. The ap
 
 2. Generate the `Chroma` vector database by running the notebook found under `notebooks/embedding_vectordb.ipynb`.
 
-3. Download the pretrained BERT classifier model [here]() and put it under a folder `checkpoints/`.
+3. Download the pretrained BERT classifier model [here](https://drive.google.com/file/d/14LsoD1eWix4xPHDJLRluzkIN44CgrbgM/view?usp=sharing) and put it under a folder `checkpoints/`.
 
 
 ## Usage
