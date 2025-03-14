@@ -3,12 +3,12 @@ from langchain_chroma import Chroma
 from langchain.agents import tool
 from langchain_core.documents import Document
 
-from bert_classifier import CustomDataset, BERTModel
+from modules.bert_classifier import CustomDataset, BERTModel
 import torch
 from transformers import BertTokenizer
 from typing import Tuple, List, Dict
 
-from online_search import get_search_results, extract_text_from_url
+from modules.online_search import get_search_results, extract_text_from_url
 
 
 @tool

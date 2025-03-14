@@ -5,8 +5,8 @@ from langchain.agents.format_scratchpad.openai_tools import format_to_openai_too
 from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
 
 from dotenv import load_dotenv
-import agent_tools
-from paddle_ocr import extract_text_from_image
+from modules import agent_tools
+from modules.paddle_ocr import extract_text_from_image
 
 class InfauxAgent:
 
@@ -42,7 +42,7 @@ class InfauxAgent:
         )
         self.agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
-    def invoke(self, query: str) -> str:
+    def respond(self, query: str) -> str:
         response = self.agent_executor.invoke({"input": query})
         return response["output"]
 
@@ -53,6 +53,6 @@ if __name__ == "__main__":
     data = extract_text_from_image(image_path)
     #data = "Over 2.4 million Singaporeans to receive up to S$400 in September to help with cost of living"
     agent = InfauxAgent()
-    response = agent.invoke(data)
+    response = agent.respond(data)
     print(f"\n {response}")
     
