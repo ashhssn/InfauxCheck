@@ -126,3 +126,28 @@
     color: black;
     max-width: 75%;
 }
+
+.drag-overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.drag-overlay.show {
+    display: flex;
+    flex-direction: column;
+}
+.drag-overlay i {
+    font-size: 60px;
+    margin-bottom: 15px;
+}

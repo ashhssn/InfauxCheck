@@ -38,8 +38,12 @@
         </div>
         <!-- End Of Sidebar -->
 
+        <div class="drag-overlay" id="dragOverlay">
+          <i class="fas fa-upload text-center"></i>
+          <h1 class="my-3 text-center">Add Anything</h1>
+          <h3 class="text-center">Drop any file here to add it to the conversation</h3>
+        </div>
         <div class="col-9 p-0" id="content-bar-container">
-
           <div class="container-fluid p-0" id="content-bar">
             <div class="d-flex flex-column overflow-hidden border-start min-h-screen max-h-screen">
      
@@ -51,25 +55,32 @@
                 <div class="container" id="chat-content">
 
                   <div class="d-flex flex-column justify-content-center align-items-center" id="welcome-card">
-                    <h2 class="mb-4">Welcome To InfauxCheck</h2>
+                    <h1 class="mb-2 text-center">Welcome To InfauxCheck</h1>
+                    <hr class="my-1">
+                    <div class="mb-2">
+                      <h4 class="text-center mb-2">InfauxCheck is an <b>LLM Agent-powered application</b> to combat misinformation</h4>
+                      <hr class="my-3 border-0">
+                      <h5 class="text-center"><b>Get started</b> with InfauxCheck, You Can Start By:</h5>
+                    </div>
                     <div class="row g-4 py-2 justify-content-center">
-                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="card h-100 shadow-sm rounded-4 text-center p-4">
-                            <div class="icon mb-2">
-                                <i class="fa-solid fa-brain fs-2" width="40"></i>
-                            </div>
-                            <h5 class="fw-bold">Adaptive Learning</h5>
-                            <p class="text-muted">InfauxCheck AI continuously evolves by analyzing emerging misinformation patterns, ensuring accurate and up-to-date verification.</p>
-                        </div>
-                      </div>
 
                       <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="card h-100 shadow-sm rounded-4 text-center p-4">
                             <div class="icon mb-2">
                               <i class="fa-solid fa-magnifying-glass fs-2" width="40"></i>
                             </div>
-                            <h5 class="fw-bold">Context-Aware Verification</h5>
-                            <p class="text-muted">Our AI goes beyond surface-level checks, analyzing contextual nuances, sources, and cross-referencing data for precise fact verification.</p>
+                            <h5 class="fw-bold">1. Enter Your Claim</h5>
+                            <p class="text-muted">Upload a <b>text claim</b> or an <b>image</b> containing information, and let our AI fact-check it for you</p>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card h-100 shadow-sm rounded-4 text-center p-4">
+                            <div class="icon mb-2">
+                                <i class="fa-solid fa-brain fs-2" width="40"></i>
+                            </div>
+                            <h5 class="fw-bold">2. InfauxCheck Verification</h5>
+                            <p class="text-muted">InfauxCheck AI verifies the input using <b>RAG</b> and <b>online searches</b> to assess credibility</p>
                         </div>
                       </div>
 
@@ -78,8 +89,8 @@
                             <div class="icon mb-2">
                               <i class="fa-solid fa-photo-film fs-2" width="40"></i>
                             </div>
-                            <h5 class="fw-bold">Multi-Modal Fact-Checking</h5>
-                            <p class="text-muted">Combining text,and images, InfauxCheck verifies claims across different media formats for a comprehensive misinformation defense.</p>
+                            <h5 class="fw-bold">3. View Results</h5>
+                            <p class="text-muted">Our AI will provide a detailed fact-check response with verified sources and a truth probability score</p>
                         </div>
                       </div>
 
@@ -88,8 +99,8 @@
                             <div class="icon mb-2">
                               <i class="fa-solid fa-user-group fs-2" width="40"></i>
                             </div>
-                            <h5 class="fw-bold">Community & Expert Collaboration</h5>
-                            <p class="text-muted">Leveraging expert insights and user feedback, InfauxCheck enhances misinformation detection, refining AI responses through collective intelligence.</p>
+                            <h5 class="fw-bold">4. Community Feedback</h5>
+                            <p class="text-muted">Upcoming Feature! Users will soon be able to provide feedback to enhance AI detection accuracy</p>
                         </div>
                       </div>
                     </div> <!-- End Of Row-->
@@ -188,7 +199,40 @@
       content_bar_element.style.width = 100 + "%";
     };
   }
-  
+  let selectedFile;
+  const fileNameDisplay = document.getElementById("file-name");
+  const dragOverlay = document.getElementById("dragOverlay");
+ 
+  // The reason why event.preventDefault is used here is to prevent the file being open when drag and drop
+  // As most browsers will open the file when dropped, event.preventDefault can stop that default behavior
+  // https://www.w3schools.com/jsref/event_preventdefault.asp#:~:text=The%20preventDefault()%20method%20cancels,link%20from%20following%20the%20URL
+  document.addEventListener("dragenter", (event) => {
+            event.preventDefault();
+            dragOverlay.classList.add("show");
+        });
+
+  document.addEventListener("dragleave", (event) => {
+      if (event.relatedTarget === null) {
+          dragOverlay.classList.remove("show");
+      }
+  });
+  // https://stackoverflow.com/questions/46668079/addeventlistener-drop-not-firing
+  document.addEventListener("dragover", function(event) {
+    event.preventDefault();
+  });
+
+  document.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dragOverlay.classList.remove("show");
+
+        selectedFile = event.dataTransfer.files[0];
+
+        if (selectedFile) {
+          console.log(selectedFile,selectedFile.length)
+          readAndPreview(selectedFile,1)
+        }
+    });
+
   let images = []
   document.querySelector('#upload_photo').addEventListener("change", previewImages);
   function previewImages(){
