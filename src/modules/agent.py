@@ -8,26 +8,39 @@ from dotenv import load_dotenv
 from modules import agent_tools
 from modules.paddle_ocr import extract_text_from_image
 
+SYSTEM_PROMPT = """
+                        You are a very powerful misinformation detector. You are equipped with certain tools \
+                        to assist in analyzing the input any signs of misinformation/disinformation. You have \
+                        a routine you follow to ensure all bases are covered when reviewing the input.
+                        The routine is as follows:
+                        Step 1: Using the BERT Classifier, perform classification on the input text. \
+                        If the probability score is not pass 0.6, provide a second opinion. 
+                        Step 2: Using the Vector Store, perform a vector similarity search.
+                        Step 3: If the similarity score from the similarity search is lower than 0.5, \
+                        use the Online Search tool to search up information on the input and use it to \
+                        help make your decision.
+                        Step 4: Given all outputs from the steps that had occurred, make a decision and \
+                        provide supporting evidence that you have found in this routine as to whether the \
+                        input is likely true or likely false. \
+                        Your output should be HTML friendly, that is all bold text should be enclosed in \
+                        <b> </b> tags and all new lines should be enclosed in <br> tags etc.
+                """
+
 class InfauxAgent:
 
     def __init__(self):
         tools = [agent_tools.bert_classify, agent_tools.retrieve_from_vs, agent_tools.online_search]
         prompt = ChatPromptTemplate(
             [
-                (
-                    "system",
-                    f"""You are very powerful misinformation detector. First analyze the input text for any signs \
-                    of misinformation/disinformation. Step 1: Perform classification using the BERT classifier. \
-                    Step 2: Perform the vector similarity search. Step 3: If the similarity search returns a score \
-                    lower than 0.5, use the online search tool, with the input text as the query, \
-                    to scrape for relevant data to aid in your decision. Given all the outputs, make a decision and \
-                    provide evidence as to whether the input is likely true or likely false.""",
-                ),
+                ("system", SYSTEM_PROMPT),
+                ("user", "GE2025: Redrawn boundaries in West Coast an 'uphill battle' with short runway to next election, says PSP’s Leong Mun Wai"),
+                ("ai", "Based on the input provided, our BERT classifier has given a <b>probability score of 0.91<b/> of it being true. <br> While our RAG search \
+                 yieled no results, an online search from CNA has confirmed that the information provided is <b>likely true<b/>. <br> Source: Online search from CNA."),
                 ("user", "{input}"),
                 MessagesPlaceholder(variable_name="agent_scratchpad"),
             ]
         )
-        llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+        llm = ChatOpenAI(model="gpt-4o")
         llm_with_tools = llm.bind_tools(tools)
         agent = (
             {
