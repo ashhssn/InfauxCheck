@@ -1,9 +1,11 @@
 requests
 beautifulsoup4
-google
+googlesearch-python
 pandas
 transformers
 torch
-langchain
 python-dotenv
 paddlepaddle
+langchain
+langchain-openai
+langchain-chroma
