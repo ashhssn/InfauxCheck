@@ -25,6 +25,43 @@ InfauxCheck is an LLM Agent-powered application to combat misinformation. The ap
 * Well-documented codebase
 * Leveraging on GenAI tools (ChatGPT, GitHub Copilot) to improve development efficiency
 
+## Directory Structure
+
+```bash
+.
+├── checkpoints
+│   └── best_bert_weights.pt
+├── data
+│   ├── articles_content_cleaned.csv
+│   └── articles_url.csv
+├── notebooks
+│   ├── bert-classifier.ipynb
+│   ├── data_cleaning.ipynb
+│   ├── embedding_vectordb.ipynb
+│   ├── example_retrieval.ipynb
+│   └── OCR-pipeline.ipynb
+├── src
+│   ├── modules
+│   │   ├── __init__.py
+│   │   ├── agent_tools.py
+│   │   ├── agent.py
+│   │   ├── bert_classifier.py
+│   │   ├── online_search.py
+│   │   └── paddle_ocr.py
+│   ├── scraping
+│   │   ├── __init__.py
+│   │   ├── cna_scraping_content.py
+│   │   └── cna_scraping_url.py
+│   ├── static
+│   ├── templates
+│   ├── __init__.py
+│   └── main.py
+├── .gitignore
+├── README.md
+├── LICENSE
+└── requirements.txt
+```
+
 ## Installation
 
 1. Install `requirements.txt`. Recommened to use a virtual environment.
