@@ -8,6 +8,7 @@ def get_search_results(query: str, num_results: int = 5) -> List[str]:
     Perform a Google search and return the top-k results as URLs.
     """
     search_results = []
+    # store the search results in list
     for j in search(query, num_results=num_results):
         search_results.append(j)
     return search_results

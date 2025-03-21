@@ -29,7 +29,9 @@ SYSTEM_PROMPT = """
 class InfauxAgent:
 
     def __init__(self):
+        # define tools for agent
         tools = [agent_tools.bert_classify, agent_tools.retrieve_from_vs, agent_tools.online_search]
+        # create prompt template
         prompt = ChatPromptTemplate(
             [
                 ("system", SYSTEM_PROMPT),
@@ -40,6 +42,7 @@ class InfauxAgent:
                 MessagesPlaceholder(variable_name="agent_scratchpad"),
             ]
         )
+        # define agent
         llm = ChatOpenAI(model="gpt-4o")
         llm_with_tools = llm.bind_tools(tools)
         agent = (
@@ -55,10 +58,12 @@ class InfauxAgent:
         )
         self.agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
+    # create method to respond to user input
     def respond(self, query: str) -> str:
         response = self.agent_executor.invoke({"input": query})
         return response["output"]
 
+# only execute if the script is run directly
 if __name__ == "__main__":
     load_dotenv()
     image_path = "data/images/2024-02-25_3310289540023402853.jpg"  # Replace with your image path

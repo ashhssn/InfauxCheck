@@ -20,6 +20,7 @@ def bert_classify(data: str) -> Tuple[torch.Tensor, torch.Tensor]:
     # Load the model
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = BERTModel(numcl=1).to(device)
+    # attempt to load the model weights
     try:
         model.load_state_dict(torch.load("checkpoints/best_bert_weights.pt", map_location=device), strict=False)
         model.eval()
@@ -33,6 +34,7 @@ def bert_classify(data: str) -> Tuple[torch.Tensor, torch.Tensor]:
     dataset = CustomDataset(data, tokenizer, max_len=64)
     loader = torch.utils.data.DataLoader(dataset, batch_size=16)
 
+    # Perform inference
     for batch in loader:
         input_ids = batch['input_ids'].to(device)
         attention_mask = batch['attention_mask'].to(device)
@@ -71,7 +73,7 @@ def online_search(query: str) -> Dict[str, str]:
     """
     search_results = get_search_results(query)
     search_data = {}
-    
+    # store text in dictionary
     for url in search_results:
         search_data[url] = extract_text_from_url(url)
     
